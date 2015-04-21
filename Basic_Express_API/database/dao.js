@@ -7,12 +7,22 @@ var dao = {
   getProduct: function getProduct(opts, callback) {
 
     if (opts.id === null) {
-      callback(null, db.products)
-    } else {
-      callback(null, _.findWhere(db.products, {id: opts.id}));
+      callback(null, db.products);
+      return;
     }
-    //error
-    //callback('Error in getProduct');
+
+    var product = _.findWhere(db.products, {id: opts.id});
+
+    if (_.isUndefined(product)) {
+      var error = {
+        status: 404,
+        message: 'Product not found'
+      };
+      callback(error, null);
+      return;
+    }
+
+    callback(null, product);
   },
 
   getProductById: function getProductById(opts, callback) {

@@ -20,20 +20,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  if (req.body.product === void 0) {
-    var err = new Error('Product Not Found');
-    err.status = 404;
-    next(err);
-    return;
-  }
 
-  var product = req.body.product;
+  var id = req.params.id;
 
-  products.push(product);
-
-  res.status(200).json({
-    products: products
-  });
+  productService
+    .getProduct(id)
+    .then(function(product) {
+      res.status(200).json({
+        products: product
+      });
+    }, function(err) {
+      res.status(err.status).json(err);
+    });
 });
 
 router.post('/:id', function(req, res, next) {

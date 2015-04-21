@@ -9,4 +9,9 @@ var getAllProducts = function getAllProducts() {
   return productRepository.getAllProducts();
 };
 
+var getProduct = function getProduct(id) {
+  return productRepository.getProduct(id);
+};
+
 productService.getAllProducts = getAllProducts;
+productService.getProduct = getProduct;

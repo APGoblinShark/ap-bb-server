@@ -3,7 +3,6 @@ exports.products = [{
   "id": "0001",
   "name": "Marijuana",
   "picture_url": "http://www.isiahfactor.com/wp-content/uploads/2015/02/wpid-marijuana71.jpg",
-  "quantity": 238,
   "transactions": [{
     "id": "0001",
     "date": "2015-01-01 00:00:00",
@@ -37,7 +36,6 @@ exports.products = [{
   "id": "0002",
   "name": "Cocaïne",
   "picture_url": "https://consumeraffairs.global.ssl.fastly.net/files/news/cocaine.jpg",
-  "quantity": 47.8,
   "transactions": [{
     "id": "0001",
     "date": "2015-01-01 00:00:00",
@@ -71,7 +69,6 @@ exports.products = [{
   "id": "0003",
   "name": "Opium",
   "picture_url": "http://www.nuttyhistory.com/uploads/1/2/1/5/12150034/7121958_orig.jpg",
-  "quantity": 1253.98,
   "transactions": [{
     "id": "0001",
     "date": "2015-01-01 00:00:00",
@@ -105,7 +102,6 @@ exports.products = [{
   "id": "0004",
   "name": "Heroïne",
   "picture_url": "http://www.toute-lactu.com/wp-content/uploads/2013/08/h%C3%A9ro%C3%AFne_seringue-1024x647.jpg",
-  "quantity": 5.7,
   "transactions": [{
     "id": "0001",
     "date": "2015-01-01 00:00:00",

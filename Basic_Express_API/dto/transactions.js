@@ -1,4 +1,6 @@
-var _ = require('../tools/utils')._;
+var utils = require('../tools/utils');
+var _ = utils._;
+
 var transactionValidator = require('../validator/transactions');
 
 var transactionDtoBuilder = exports;
@@ -11,7 +13,7 @@ var transactionDtoFromDb = function transactionDtoFromDb(transaction) {
 
   return {
     id: transaction.id,
-    date: moment(transaction.date).format(),
+    date: utils.moment(transaction.date).format(),
     price: transaction.price,
     quantity: transaction.quantity,
     movement: transaction.movement,
@@ -20,6 +22,7 @@ var transactionDtoFromDb = function transactionDtoFromDb(transaction) {
 };
 
 var transactionsDtoFromDb = function transactionsDtoFromDb(transactions) {
+
   if (transactionValidator.validateTransactions === false) {
     return null;
   }
@@ -30,7 +33,7 @@ var transactionsDtoFromDb = function transactionsDtoFromDb(transactions) {
   _.each(transactions, function(transaction) {
     transactionDto = transactionDtoFromDb(transaction);
 
-    if (!_.isNull(transactionDto)) {
+    if (_.isNull(transactionDto) === false) {
       transactionsDto.push(transactionDto);
     }
   });

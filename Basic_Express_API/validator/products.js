@@ -15,8 +15,6 @@ var validateProduct = function validateProduct(product) {
     return false;
   } else if (_.isString(product.picture_url) === false || _.str.isBlank(product.picture_url)) {
     return false;
-  } else if (_.isNumber(product.quantity) === false || _.str.isBlank(product.quantity)) {
-    return false;
   } else if (_.isArray(product.transactions) === false) {
     return false;
   }

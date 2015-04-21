@@ -59,13 +59,6 @@ app.use(function(err, req, res, next) {
 });
 
 var server = app.listen(3000, function () {
-  mongoose.connect('mongodb://localhost/test');
-
-  var db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function (callback) {
-    console.log('connection to mongodb : success');
-  });
 
   var host = server.address().address;
   var port = server.address().port;
