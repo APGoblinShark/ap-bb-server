@@ -60,8 +60,5 @@ router.post('/:id/transactions', function(req, res, next) {
     }, function(err) {
       next(new Error(err));
     });
-
-  res.status(200).json({
-  });
 });
 module.exports = router;
