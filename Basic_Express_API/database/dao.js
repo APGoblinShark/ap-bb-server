@@ -6,7 +6,7 @@ var dao = {
 
   getProduct: function getProduct(opts, callback) {
 
-    if (opts.id === null) {
+    if (_.isNull(opts.id)) {
       callback(null, db.products);
       return;
     }
@@ -18,27 +18,34 @@ var dao = {
         status: 404,
         message: 'Product not found'
       };
-      callback(error, null);
+      callback(error);
       return;
     }
 
     callback(null, product);
   },
 
-  getProductById: function getProductById(opts, callback) {
-  },
-
-  getTransactionById: function getTransactionById(opts, callback) {
-
-  },
-
   updateProduct: function updateProduct(opts, callback) {
 
-  },
+    var productPosition = _.findIndex(db.products, function(product) {
+      return product.id === opts.productId;
+    });
 
-  addTransactionToProduct: function addTransactionToProduct(opts, callback) {
+    if (productPosition === -1) {
+      var error = {
+        status: 404,
+        message: 'Product not found'
+      };
+      callback(error);
+      return;
+    }
 
+    db.products[productPosition] = opts.product;
+    console.log('product = ', db.products[productPosition]);
+
+    callback(null, db.products[productPosition]);
   }
+
 };
 
 module.exports = dao;

@@ -7,7 +7,7 @@ var transactionDtoBuilder = exports;
 
 var transactionDtoFromDb = function transactionDtoFromDb(transaction) {
 
- if (transactionValidator.validateTransaction === false) {
+ if (transactionValidator.validateTransaction(transaction, true) === false) {
    return null;
  }
 
@@ -23,7 +23,7 @@ var transactionDtoFromDb = function transactionDtoFromDb(transaction) {
 
 var transactionsDtoFromDb = function transactionsDtoFromDb(transactions) {
 
-  if (transactionValidator.validateTransactions === false) {
+  if (transactionValidator.validateTransactions(transactions) === false) {
     return null;
   }
 
@@ -41,5 +41,21 @@ var transactionsDtoFromDb = function transactionsDtoFromDb(transactions) {
   return transactionsDto;
 };
 
+var transactionDtoFromController = function transactionDtoFromController(transaction) {
+  if (transactionValidator.validateTransaction(transaction, false) === false) {
+    return null;
+  }
+
+  return {
+    id: null,
+    date: utils.moment().format(),
+    price: transaction.price,
+    quantity: transaction.quantity,
+    movement: transaction.movement,
+    details: transaction.details
+  }
+};
+
 transactionDtoBuilder.transactionDtoFromDb = transactionDtoFromDb;
 transactionDtoBuilder.transactionsDtoFromDb = transactionsDtoFromDb;
+transactionDtoBuilder.transactionDtoFromController = transactionDtoFromController;

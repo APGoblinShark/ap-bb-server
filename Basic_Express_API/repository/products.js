@@ -1,8 +1,11 @@
-var _ = require('../tools/utils')._;
+var utils = require('../tools/utils');
+var _ = utils._;
+
 var Q = require('q');
 var dao = require('../database/dao');
 
 var productDto = require('../dto/products');
+var productService = require('../services/products');
 
 var productRepository = exports;
 
@@ -65,6 +68,44 @@ var getProduct = function getProduct(id) {
     });
 };
 
+var addTransactionToProduct = function addTransactionToProduct(transactionDto, productId) {
+  return productService
+    .getProduct(productId)
+    .then(function success(product) {
+
+      // Transaction doesn't have an id yet.
+      // If we had a db that generates id we could have let it do it.
+      // And only add the transaction but meh ... who cares ? ;)
+      transactionDto.id = utils.generateUUID();
+      product.transactions.push(transactionDto);
+
+      return Q.fcall(
+        function() {
+
+          var opts = {
+            productId: productId,
+            product: product
+          };
+
+          var deferred = Q.defer();
+
+          dao.updateProduct(opts, function(err) {
+            if (err) {
+              deferred.reject(err);
+              return;
+            }
+
+            deferred.resolve(transactionDto);
+          });
+
+          return deferred.promise;
+        });
+    }, function error(err) {
+      throw err;
+    });
+};
+
 
 productRepository.getAllProducts = getAllProducts;
 productRepository.getProduct = getProduct;
+productRepository.addTransactionToProduct = addTransactionToProduct;

@@ -2,6 +2,9 @@ var utils = require('../tools/utils');
 var _ = utils._;
 var transactionDtoBuilder = require('../dto/transactions');
 
+var productRepository = require('../repository/products');
+
+var productService = require('./products');
 var transactionService = exports;
 
 var getQuantity = function getQuantity(transactions) {
@@ -26,4 +29,9 @@ var getQuantity = function getQuantity(transactions) {
   return quantityTotal;
 };
 
+var addTransaction = function addTransaction(transactionDto, productId) {
+  return productRepository.addTransactionToProduct(transactionDto, productId);
+};
+
 transactionService.getQuantity = getQuantity;
+transactionService.addTransaction = addTransaction;

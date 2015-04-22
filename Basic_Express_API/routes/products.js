@@ -1,7 +1,11 @@
+var _ = require('../tools/utils')._;
+
 var express = require('express');
 var router = express.Router();
 
 var productService = require('../services/products');
+var transactionService = require('../services/transaction');
+var transactionDtoBuilder = require('../dto/transactions');
 
 /* GET product listing. */
 router.get('/', function(req, res, next) {
@@ -30,24 +34,34 @@ router.get('/:id', function(req, res, next) {
         products: product
       });
     }, function(err) {
-      res.status(err.status).json(err);
+      next(err);
     });
 });
 
-router.post('/:id', function(req, res, next) {
-  if (req.body.product === void 0) {
-    var err = new Error('Product Not Found');
-    err.status = 404;
+router.post('/:id/transactions', function(req, res, next) {
+
+  var transactionDto = transactionDtoBuilder.transactionDtoFromController(req.body.transaction);
+
+  if (_.isNull(transactionDto) || _.isNull(transactionDto.id) === false) {
+    var err = new Error('Bad request: transaction object not correctly formatted.');
+    err.status = 400;
     next(err);
     return;
   }
 
-  var product = req.body.product;
+  var productId = req.params.id;
 
-  products.push(product);
+  transactionService
+    .addTransaction(transactionDto, productId)
+    .then(function(transaction) {
+      res.status(200).json({
+        transaction: transaction
+      });
+    }, function(err) {
+      next(new Error(err));
+    });
 
   res.status(200).json({
-    products: products
   });
 });
 module.exports = router;
