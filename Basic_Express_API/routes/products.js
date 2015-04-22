@@ -34,6 +34,7 @@ router.get('/:id', function(req, res, next) {
         products: product
       });
     }, function(err) {
+      console.log('err = ', err);
       next(err);
     });
 });
@@ -58,7 +59,7 @@ router.post('/:id/transactions', function(req, res, next) {
         transaction: transaction
       });
     }, function(err) {
-      next(new Error(err));
+      next(err);
     });
 });
 module.exports = router;

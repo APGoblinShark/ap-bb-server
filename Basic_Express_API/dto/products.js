@@ -4,40 +4,6 @@ var transactionDtoBuilder = require('../dto/transactions');
 var transactionService = require('../services/transaction');
 var productDtoBuilder = exports;
 
-//var buildProductDto = function buildProductDto (product) {
-//
-//  if (_.isObject(product) === false) {
-//    return null;
-//  }
-//
-//  if (productValidator.validateProduct(product) === false) {
-//    return null;
-//  }
-//
-//  return {
-//    id: product.id,
-//    name: product.name,
-//    picture_url: product.picture_url,
-//    quantity: product.quantity // to calculate
-//  };
-//};
-//
-//var buildProductsDto = function buildProductsDto (products) {
-//
-//  if (_.isArray(products) === false) {
-//    return null;
-//  }
-//
-//  var productsDto = [];
-//
-//  _.each(products, function(product) {
-//    var productDto = buildProductDto(product);
-//
-//    if (product !== null)
-//      productsDto.push(productDto);
-//  });
-//};
-
 var buildProductDtoWithTransactionFromDb = function buildProductDtoWithTransactionFromDb(product) {
   var productDto = buildProductDtoFromDb(product);
 
@@ -80,7 +46,7 @@ var buildProductsDtoFromDb = function buildProductsDtoFromDb (products) {
   var productsDto = [];
   var productDto = {};
 
-  _.each(products, function(product, index) {
+  _.each(products, function(product) {
     productDto = buildProductDtoFromDb(product);
 
     if (_.isNull(productDto) === false)
@@ -89,9 +55,7 @@ var buildProductsDtoFromDb = function buildProductsDtoFromDb (products) {
 
   return productsDto;
 };
-//
-//productDtoBuilder.buildProductsDto = buildProductsDto;
-//productDtoBuilder.buildProductDto = buildProductDto;
+
 productDtoBuilder.buildProductsDtoFromDb = buildProductsDtoFromDb;
 productDtoBuilder.buildProductDtoFromDb = buildProductDtoFromDb;
 productDtoBuilder.buildProductDtoWithTransactionFromDb = buildProductDtoWithTransactionFromDb;

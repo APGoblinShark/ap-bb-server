@@ -41,7 +41,6 @@ var dao = {
     }
 
     db.products[productPosition] = opts.product;
-    console.log('product = ', db.products[productPosition]);
 
     callback(null, db.products[productPosition]);
   }
