@@ -31,7 +31,7 @@ router.get('/:id', function(req, res, next) {
     .getProduct(id)
     .then(function(product) {
       res.status(200).json({
-        products: product
+        product: product
       });
     }, function(err) {
       console.log('err = ', err);
@@ -42,7 +42,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/:id/transactions', function(req, res, next) {
 
-  var transactionDto = transactionDtoBuilder.transactionDtoFromController(req.body.transaction);
+  var transactionDto = transactionDtoBuilder.transactionDtoFromController(req.body);
 
   if (_.isNull(transactionDto) || _.isNull(transactionDto.id) === false) {
     var err = new Error('Bad request: transaction object not correctly formatted.');
