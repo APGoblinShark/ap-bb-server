@@ -34,7 +34,6 @@ router.get('/:id', function(req, res, next) {
         product: product
       });
     }, function(err) {
-      console.log('err = ', err);
       next(err);
     });
 
