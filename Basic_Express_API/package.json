@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test-services": "mocha --reporter nyan --recursive ./test/unit/services/*"
+    "test-services": "mocha --reporter spec --recursive ./test/unit/services/*"
   },
   "dependencies": {
     "body-parser": "~1.12.0",

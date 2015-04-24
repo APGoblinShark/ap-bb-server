@@ -1,10 +1,5 @@
 /*jshint expr: true*/
 
-
-
-
-
-
 require('../../tests-helper');
 
 
@@ -16,7 +11,7 @@ describe('ProductService', function() {
   // stub-ed API
   var emptyFn = function emptyFn() {};
 
-  // Internal service dependency API
+  // Defined layers API
   var _productRepositoryAPI = {
     getAllProducts: emptyFn,
     getProduct: emptyFn,
@@ -66,19 +61,14 @@ describe('ProductService', function() {
       productServiceAPI = null;
     });
 
-
-
     // Unit test sample
     it('should succeed because its a demo', function(done) {
 
-      // # 1 3# Stub repository layer
-      //
+      // # 1 # Stub repository layer
       sinon.stub(productRepositoryAPI, 'getAllProducts', function() {
         return Q.fcall(function() {
 
           var data = [];
-          console.log('plop');
-
           return data;
         });
       });
@@ -91,21 +81,15 @@ describe('ProductService', function() {
       servicePromise
         .then(function(data) {
 
-          console.log('hey');
-          console.log(data);
-
+          // spy: test the repository has been called
           expect(productRepositoryAPI.getAllProducts).to.have.callCount(1);
 
-          // console.log(expect(servicePromise).to.be.fulfilled);
-
+          // shouldJS: test expected behavior
           expect(servicePromise).to.be.fulfilled;
-          expect(servicePromise).to.be.rejected;
 
-          servicePromise.should.be.fulfilled;
-          servicePromise.should.be.rejected;
-
-          // data.should.not.be.empty;
-          data.should.not.be.an.Array;
+          // shouldJS: test expected data
+          //  (repository data transformed by the service layer)
+          data.should.be.an.Array;
 
           done();
         })
@@ -143,6 +127,67 @@ describe('ProductService', function() {
     //     // end of promise chain
     //     .done();
     // });
+
+
+  });
+
+
+
+  /////////////////
+  //
+  // getProduct(id)
+  //
+  /////////////////
+  describe('#getProduct(id)', function() {
+
+    // beforeEach (create stubs, renew service)
+    beforeEach(function() {
+      testData = deepCloneWithProblemOnDateObject(_testData);
+
+      productRepositoryAPI = _.extend({}, _productRepositoryAPI);
+      productServiceAPI = _.extend({}, _productServiceAPI);
+
+      // renew projectService & proxy dependencies
+      productServiceAPI = proxyquire('../../services/products', {
+        '../repository/products': productRepositoryAPI
+      });
+    });
+
+    // afterEach (restore stubs, forgot service)
+    afterEach(function() {
+      // restore all stub-ed API
+
+      // forgot about the service
+      productServiceAPI = null;
+    });
+
+    // Unit test sample
+    it('should fail because we do not give an id', function(done) {
+
+      // # 1 # No stub: failure will happens before repository
+
+      // # 2 # Perform service call
+      var servicePromise = productServiceAPI.getProduct();
+
+      // # 3 #: Test expectations
+      servicePromise
+        .then(function(data) {
+
+          // spy: test the repository has been called
+          expect(productRepositoryAPI.getAllProducts).to.have.callCount(1);
+
+          // shouldJS: test expected behavior
+          expect(servicePromise).to.be.fulfilled;
+
+          // shouldJS: test expected data
+          //  (repository data transformed by the service layer)
+          data.should.be.an.Array;
+
+          done();
+        })
+        // end of promise chain
+        .done();
+    });
 
 
   });
