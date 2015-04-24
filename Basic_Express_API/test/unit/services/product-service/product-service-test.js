@@ -1,5 +1,10 @@
 /*jshint expr: true*/
 
+
+
+
+
+
 require('../../tests-helper');
 
 
@@ -62,7 +67,7 @@ describe('ProductService', function() {
     });
 
 
-/*
+
     // Unit test sample
     it('should succeed because its a demo', function(done) {
 
@@ -83,54 +88,61 @@ describe('ProductService', function() {
       var servicePromise = productServiceAPI.getAllProducts();
 
       // # 3 #: Test expectations
-      servicePromise.then(function(data) {
+      servicePromise
+        .then(function(data) {
 
           console.log('hey');
           console.log(data);
 
+          expect(productRepositoryAPI.getAllProducts).to.have.callCount(1);
+
+          // console.log(expect(servicePromise).to.be.fulfilled);
+
           expect(servicePromise).to.be.fulfilled;
           expect(servicePromise).to.be.rejected;
 
+          servicePromise.should.be.fulfilled;
           servicePromise.should.be.rejected;
-          data.should.not.be.empty;
+
+          // data.should.not.be.empty;
+          data.should.not.be.an.Array;
 
           done();
         })
         // end of promise chain
         .done();
     });
-    */
-
-    // Unit test sample
-    it('fail fail fail', function(done) {
-
-      // # 1 3# Stub repository layer
-      //
-      sinon.stub(productRepositoryAPI, 'getAllProducts', function() {
-        return Q.fcall(function() {
-
-          throw new Error();
-        });
-      });
 
 
-      // # 2 # Perform service call
-      var servicePromise = productServiceAPI.getAllProducts();
-
-      // # 3 #: Test expectations
-      servicePromise.then(null,
-          function() {
-
-            expect(servicePromise).to.be.fulfilled;
-            expect(servicePromise).to.be.rejected;
-
-            servicePromise.should.be.rejected;
-
-            done();
-          })
-        // end of promise chain
-        .done();
-    });
+    // // Unit test sample
+    // it('fail fail fail', function(done) {
+    //
+    //   // # 1 3# Stub repository layer
+    //   //
+    //   sinon.stub(productRepositoryAPI, 'getAllProducts', function() {
+    //     return Q.fcall(function() {
+    //       throw new Error();
+    //     });
+    //   });
+    //
+    //
+    //   // # 2 # Perform service call
+    //   var servicePromise = productServiceAPI.getAllProducts();
+    //
+    //   // # 3 #: Test expectations
+    //   servicePromise.then(null, function() {
+    //
+    //       // expect(servicePromise).to.be.fulfilled;
+    //       // expect(servicePromise).to.be.rejected;
+    //
+    //       // servicePromise.should.be.rejected;
+    //       servicePromise.should.be.fulfilled;
+    //
+    //       done();
+    //     })
+    //     // end of promise chain
+    //     .done();
+    // });
 
 
   });

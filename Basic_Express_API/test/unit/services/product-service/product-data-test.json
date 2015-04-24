@@ -1,29 +1,3 @@
 {
 
-  "admin": {
-    "permissions": [
-      "MANAGE_MY_PROFILE",
-      "MANAGE_MY_EXPERIENCE",
-      "MANAGE_SKILL",
-      "VIEW_OTHER_PROFILE",
-      "VIEW_OTHER_EXPERIENCE",
-      "VIEW_PERSONS_LIST",
-      "VIEW_COMPANY_SKILLS",
-      "VIEW_COMPANY_PROJECT_LIST",
-      "SEARCH_COMPANY_PROJECT_LIST",
-      "EDIT_COMPANY_PROJECT_DETAILS",
-      "CREATE_COMPANY_PROJECT",
-      "GENERATE_MY_CV",
-      "MANAGE_OTHER_EXPERIENCE",
-      "MANAGE_OTHER_PROFILE",
-      "GENERATE_OTHER_CV",
-      "MANAGE_INVITE",
-      "EDIT_SKILL"
-    ],
-    "name": "ADMIN",
-    "id": "d9a1e0e8-b8ad-40ff-acaa-2f11d1ffaf6a"
-  }
-
-
-
 }

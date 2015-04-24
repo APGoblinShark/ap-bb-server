@@ -21,8 +21,8 @@ global.Q = Q;
 
 //TODO: potentially missing
 //  - should.js
-// var should = require('should');
-var should = require('chai').should(); //actually call the the function
+var should = require('should');
+// var should = require('chai').should(); //actually call the the function
 global.should = should;
 
 var deepCloneWithProblemOnDateObject = function deepCloneWithProblemOnDateObject(source) {
