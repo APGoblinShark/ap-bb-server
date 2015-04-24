@@ -106,6 +106,7 @@ var addTransactionToProduct = function addTransactionToProduct(transactionDto, p
 };
 
 
+// Repositorty public API
 productRepository.getAllProducts = getAllProducts;
 productRepository.getProduct = getProduct;
 productRepository.addTransactionToProduct = addTransactionToProduct;

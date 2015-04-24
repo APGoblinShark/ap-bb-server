@@ -13,5 +13,7 @@ var getProduct = function getProduct(id) {
   return productRepository.getProduct(id);
 };
 
+
+// Service public API
 productService.getAllProducts = getAllProducts;
 productService.getProduct = getProduct;

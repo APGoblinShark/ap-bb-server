@@ -22,7 +22,9 @@ var app = express();
 app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 
 app.use('/products', products);
@@ -52,7 +54,7 @@ app.use(function(err, req, res, next) {
     .json(err);
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(3000, function() {
 
   var host = server.address().address;
   var port = server.address().port;

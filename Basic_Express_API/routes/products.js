@@ -37,6 +37,7 @@ router.get('/:id', function(req, res, next) {
       console.log('err = ', err);
       next(err);
     });
+
 });
 
 router.post('/:id/transactions', function(req, res, next) {
