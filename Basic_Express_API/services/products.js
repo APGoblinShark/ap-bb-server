@@ -6,13 +6,13 @@ var productRepository = require('../repository/products');
 var productService = exports;
 
 var getAllProducts = function getAllProducts() {
-  return productRepository.getAllProducts();
+  var repositoryPromise =  productRepository.getAllProducts();
+  return repositoryPromise;
 };
 
 var getProduct = function getProduct(id) {
   return productRepository.getProduct(id);
 };
-
 
 // Service public API
 productService.getAllProducts = getAllProducts;
